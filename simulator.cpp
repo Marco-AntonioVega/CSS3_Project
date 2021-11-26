@@ -1,3 +1,7 @@
+/*
+Created by Marco-Antonio Vega and Gerardo Lopez
+*/
+
 // simulator.cpp
 #include <iostream>
 #include <fstream>
