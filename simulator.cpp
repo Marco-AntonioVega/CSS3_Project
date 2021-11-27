@@ -1,5 +1,7 @@
 /*
 Created by Marco-Antonio Vega and Gerardo Lopez
+CSS - 9406
+December 15, 2021
 */
 
 // simulator.cpp
@@ -34,11 +36,6 @@ int main()
     reg_map["000"] = 0;                     //r1 holds number of loops                
     reg_map["001"] = 0;                     //r2 holds sum total
     reg_map["010"] = 0;                     //r3 holds current num to add to sum
-    // reg_map["011"] = 0;                     //r4 register set to zero
-    // reg_map["100"] = 0;                     //r5 register set to zero
-    // reg_map["101"] = 0;                     //r6 register set to zero
-    // reg_map["110"] = 0;                     //r7 register set to zero
-    // reg_map["111"] = 0;                     //r8 register set to zero
 
     while(fin >> instruction)               // read in the entire line of instruction (13 bits)
     {         
@@ -56,10 +53,10 @@ int main()
             for(const auto& key : reg_map)
                 reg_map[key.first] = 0;
         }
-        else if(opcode == "1000") //INPUT                  // if the first 4 bits are opcode for PUT
+        else if(opcode == "1000") //INPUT
         {
             int num;
-            cout << "Enter a number: ";
+            cout << "Enter the number: ";
             cin >> num;
             reg_map[instruction.substr(10, 3)] = num;
         }
@@ -83,9 +80,9 @@ int main()
                     i++;
             }
         }
-        else if(opcode == "0101") //SUM                 // SUM instruction is followed by three registers
+        else if(opcode == "0101") //SUM
         {   
-            reg_map[instruction.substr(10, 3)] += bin_to_dec(instruction.substr(7, 3));
+            reg_map[instruction.substr(10, 3)] += reg_map[instruction.substr(7, 3)];
         }
         else if(opcode == "0111") { // SUBT
             reg_map[instruction.substr(10, 3)] -= bin_to_dec(instruction.substr(7, 3));
