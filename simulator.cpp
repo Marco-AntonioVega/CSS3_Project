@@ -34,11 +34,11 @@ int main()
     reg_map["000"] = 0;                     //r1 holds number of loops                
     reg_map["001"] = 0;                     //r2 holds sum total
     reg_map["010"] = 0;                     //r3 holds current num to add to sum
-    reg_map["011"] = 0;                     //r4 register set to zero
-    reg_map["100"] = 0;                     //r5 register set to zero
-    reg_map["101"] = 0;                     //r6 register set to zero
-    reg_map["110"] = 0;                     //r7 register set to zero
-    reg_map["111"] = 0;                     //r8 register set to zero
+    // reg_map["011"] = 0;                     //r4 register set to zero
+    // reg_map["100"] = 0;                     //r5 register set to zero
+    // reg_map["101"] = 0;                     //r6 register set to zero
+    // reg_map["110"] = 0;                     //r7 register set to zero
+    // reg_map["111"] = 0;                     //r8 register set to zero
 
     while(fin >> instruction)               // read in the entire line of instruction (13 bits)
     {         
@@ -61,25 +61,25 @@ int main()
             int num;
             cout << "Enter a number: ";
             cin >> num;
-            reg_map["000"] = num;
+            reg_map[instruction.substr(10, 3)] = num;
         }
         else if(opcode == "1010") { //JUMP
-            if(instruction.substr(9, 1) == "0")
-                i += bin_to_dec(instruction.substr(10, 3));
+            if(instruction.substr(8, 1) == "0")
+                i += bin_to_dec(instruction.substr(9, 4));
             else
-                i -= bin_to_dec(instruction.substr(10, 3));
+                i -= bin_to_dec(instruction.substr(9, 4));
         }
         else if(opcode == "1110") { //SKIPCOND
             if(instruction.substr(10, 3) == "100") {
-                if(reg_map["000"] == 0)
+                if(reg_map[instruction.substr(7, 3)] == 0)
                     i++;
             }
             else if(instruction.substr(10, 3) == "000") {
-                if(reg_map["000"] < 0)
+                if(reg_map[instruction.substr(7, 3)] < 0)
                     i++;
             }
             else if(instruction.substr(10, 3) == "101") {
-                if(reg_map["000"] > 0)
+                if(reg_map[instruction.substr(7, 3)] > 0)
                     i++;
             }
         }
@@ -95,16 +95,10 @@ int main()
             string regis = instruction.substr(10,3);     // find which register to print
             cout << reg_map[regis] << endl;             // use those 3 bits with map to find value.
         }
-        // else if(opcode == "1010") //MAKE THE ARRAY
-        // {
-        //     string n = instruction.substr(4,6);         // read the 6 bits related to size of array
-        //     int val = bin_to_dec(n);                    // convert binary to decimal
-        //     string regis = instruction.substr(10,3);    // find the 3 bits related to the array
-        //     ary_map[regis] = vector<int>(val);             
-        // }
         else if(opcode == "0001")                       // Stops the program
         {
-            cout << "Program has finished running.\n";           
+            cout << "Program has finished running.\n";
+            break;
         }
         else
         {
