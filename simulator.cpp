@@ -31,9 +31,9 @@ int main()
     map<string, vector<int>> ary_map;       // a map from strings to vector<int> used for arrays
     vector<string> memory;                 // load instructions in vector to represent memory
     
-    reg_map["000"] = 0;                     //r1 register set to zero                
-    reg_map["001"] = 0;                     //r2 register set to zero
-    reg_map["010"] = 0;                     //r3 register set to zero
+    reg_map["000"] = 0;                     //r1 holds number of loops                
+    reg_map["001"] = 0;                     //r2 holds sum total
+    reg_map["010"] = 0;                     //r3 holds current num to add to sum
     reg_map["011"] = 0;                     //r4 register set to zero
     reg_map["100"] = 0;                     //r5 register set to zero
     reg_map["101"] = 0;                     //r6 register set to zero
@@ -63,29 +63,46 @@ int main()
             cin >> num;
             reg_map["000"] = num;
         }
-        else if(opcode == "1100") //SUM                 // SUM instruction is followed by three registers
+        else if(opcode == "1010") { //JUMP
+            if(instruction.substr(9, 1) == "0")
+                i += bin_to_dec(instruction.substr(10, 3));
+            else
+                i -= bin_to_dec(instruction.substr(10, 3));
+        }
+        else if(opcode == "1110") { //SKIPCOND
+            if(instruction.substr(10, 3) == "100") {
+                if(reg_map["000"] == 0)
+                    i++;
+            }
+            else if(instruction.substr(10, 3) == "000") {
+                if(reg_map["000"] < 0)
+                    i++;
+            }
+            else if(instruction.substr(10, 3) == "101") {
+                if(reg_map["000"] > 0)
+                    i++;
+            }
+        }
+        else if(opcode == "0101") //SUM                 // SUM instruction is followed by three registers
         {   
-            string regisA = instruction.substr(4,3);    // bits 4-6 are the first register
-            string regisB = instruction.substr(7,3);    // bits 7-9 are the second register
-            string regisC = instruction.substr(10,3);   // bits 10-12 are the last register
-            
-            int sum_result = reg_map[regisA] + reg_map[regisB]; // add the first two registers
-            reg_map[regisC] = sum_result;                       // place the result in the third register
-
+            reg_map[instruction.substr(10, 3)] += bin_to_dec(instruction.substr(7, 3));
+        }
+        else if(opcode == "0111") { // SUBT
+            reg_map[instruction.substr(10, 3)] -= bin_to_dec(instruction.substr(7, 3));
         }
         else if(opcode == "1111") //OUT                 // print to screen
         {
-            string regis = instruction.substr(4,3);     // find which register to print
+            string regis = instruction.substr(10,3);     // find which register to print
             cout << reg_map[regis] << endl;             // use those 3 bits with map to find value.
         }
-        else if(opcode == "1010") //MAKE THE ARRAY
-        {
-            string n = instruction.substr(4,6);         // read the 6 bits related to size of array
-            int val = bin_to_dec(n);                    // convert binary to decimal
-            string regis = instruction.substr(10,3);    // find the 3 bits related to the array
-            ary_map[regis] = vector<int>(val);             
-        }
-        else if(opcode == "0000")                       // Stops the program
+        // else if(opcode == "1010") //MAKE THE ARRAY
+        // {
+        //     string n = instruction.substr(4,6);         // read the 6 bits related to size of array
+        //     int val = bin_to_dec(n);                    // convert binary to decimal
+        //     string regis = instruction.substr(10,3);    // find the 3 bits related to the array
+        //     ary_map[regis] = vector<int>(val);             
+        // }
+        else if(opcode == "0001")                       // Stops the program
         {
             cout << "Program has finished running.\n";           
         }
