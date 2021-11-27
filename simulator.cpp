@@ -52,15 +52,18 @@ int main()
         instruction = memory.at(i);                 // retrieve the current instruction
         opcode = instruction.substr(0,4);           // take the first 4 bits of the instruction
 
-        if(opcode == "0011") //PUT                  // if the first 4 bits are opcode for PUT
-        {
-            string n = instruction.substr(4,6);     // read the 6 bits related to numerical value
-            int val = bin_to_dec(n);                // convert binary to decimal
-
-            string regis = instruction.substr(10,3);    // find the 3 bits related to the register
-            reg_map[regis] = val;                       // use those 3 bits as location to store value
+        if(opcode == "0000") { //CLEAR
+            for(const auto& key : reg_map)
+                reg_map[key.first] = 0;
         }
-        else if(opcode == "0101") //SUM                 // SUM instruction is followed by three registers
+        else if(opcode == "1000") //INPUT                  // if the first 4 bits are opcode for PUT
+        {
+            int num;
+            cout << "Enter a number: ";
+            cin >> num;
+            reg_map["000"] = num;
+        }
+        else if(opcode == "1100") //SUM                 // SUM instruction is followed by three registers
         {   
             string regisA = instruction.substr(4,3);    // bits 4-6 are the first register
             string regisB = instruction.substr(7,3);    // bits 7-9 are the second register
