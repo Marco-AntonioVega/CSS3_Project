@@ -9,6 +9,8 @@ this number X. Then, the program asks for a number X amount of times.
 Each iteration, the input number is added to a sum variable,  
 which is outputted at the end of the program.  
 
+_______________________________________________________________________  
+
 Opcode bits:  
 
 CLEAR: 0000  
@@ -19,6 +21,8 @@ SUM: 0101
 SUBT: 0111  
 OUT: 1111  
 HALT: 0001
+
+________________________________________________________________________  
 
 For each instruction, the first four bits are for the opcode,  
 the next six bits are for the value that is being passed in,  
@@ -61,3 +65,18 @@ The "OUT" opcode outputs the value of the register address that
 corresponds with the last three bits.  
 
 THE "HALT" opcode terminates the program.  
+
+_________________________________________________________________________  
+
+General Purpose Register Architecture    
+Number of Registers: 3  
+Word size: 4  
+Size of Memory: 10  
+Addressing: Mostly Direct & Some Immediate  
+Types of Operands: Registers  
+Bits for Opcode: 4  
+Bits for Operand: 3  
+Instruction Format: Big Endian, Register-Memory  
+Fixed Instruction Width: 13 bits  
+Fixed Data Width: 4 bits  
+Fixed Register Width: 4 bits  
