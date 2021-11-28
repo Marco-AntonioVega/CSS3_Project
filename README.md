@@ -9,6 +9,8 @@ this number X. Then, the program asks for a number X amount of times.
 Each iteration, the input number is added to a sum variable,  
 which is outputted at the end of the program.  
 
+_______________________________________________________________________  
+
 Opcode bits:  
 
 CLEAR: 0000  
@@ -19,6 +21,8 @@ SUM: 0101
 SUBT: 0111  
 OUT: 1111  
 HALT: 0001
+
+________________________________________________________________________  
 
 For each instruction, the first four bits are for the opcode,  
 the next six bits are for the value that is being passed in,  
