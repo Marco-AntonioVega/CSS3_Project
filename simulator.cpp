@@ -92,7 +92,7 @@ int main()
             string regis = instruction.substr(10,3);     // find which register to print
             cout << reg_map[regis] << endl;             // use those 3 bits with map to find value.
         }
-        else if(opcode == "0001")                       // Stops the program
+        else if(opcode == "0001") //HALT                       // Stops the program
         {
             cout << "Program has finished running.\n";
             break;
