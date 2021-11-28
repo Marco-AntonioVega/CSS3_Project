@@ -30,7 +30,6 @@ int main()
     string opcode;                          // hold the binary opcode (4 bits)
     
     map<string, int> reg_map;               // a map from strings to ints used for registers
-    map<string, vector<int>> ary_map;       // a map from strings to vector<int> used for arrays
     vector<string> memory;                 // load instructions in vector to represent memory
     
     reg_map["000"] = 0;                     //r1 holds number of loops                
