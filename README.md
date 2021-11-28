@@ -62,7 +62,9 @@ corresponds with the last three bits.
 
 THE "HALT" opcode terminates the program.  
 
-General Purpose Register Architecture:  
+_________________________________________________________________________  
+
+General Purpose Register Architecture    
 Number of Registers: 3  
 Word size: 4  
 Size of Memory: 10  
