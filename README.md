@@ -61,3 +61,13 @@ The "OUT" opcode outputs the value of the register address that
 corresponds with the last three bits.  
 
 THE "HALT" opcode terminates the program.  
+
+General Purpose Register Architecture:  
+Number of Registers: 3  
+Word size: 4  
+Size of Memory: 10  
+Addressing: Mostly Direct & Some Immediate  
+Types of Operands: Registers  
+Bits for Opcode: 4  
+Bits for Operand: 3  
+Instruction Format: Big Endian, Register-Memory  
