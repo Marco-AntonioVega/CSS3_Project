@@ -71,3 +71,6 @@ Types of Operands: Registers
 Bits for Opcode: 4  
 Bits for Operand: 3  
 Instruction Format: Big Endian, Register-Memory  
+Fixed Instruction Width: 13 bits  
+Fixed Data Width: 4 bits  
+Fixed Register Width: 4 bits  
