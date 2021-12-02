@@ -1,5 +1,5 @@
 /*
-Created by Marco-Antonio Vega and Gerardo Lopez
+Created by Marco-Antonio Vega, Gerardo Lopez, and Jose Castro
 CSS 3 - 9406
 December 15, 2021
 */
